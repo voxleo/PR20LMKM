@@ -75,18 +75,6 @@ uspesnostEnot = dict()
 for key in stevilPregledovEnot:
     if stevilPregledovEnot[key][1] >= minPregledov:
         uspesnostEnot[key] = stevilPregledovEnot[key][0]/stevilPregledovEnot[key][1]
-        
-uspesnostEnot = dict(sorted(uspesnostEnot.items(), key=operator.itemgetter(1),reverse=True))
-stEnotZaPrikaz = 3
-
-prikaz = dict()
-i = 0;
-for key in uspesnostEnot:
-    if i < 1: najEnota = key
-    prikaz[key] = uspesnostEnot[key]
-    i+=1
-    if i == stEnotZaPrikaz: break
-centers = range(len(prikaz))
 ```
 
 ![Graf2](slike/graf2.png)
