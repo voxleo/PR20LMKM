@@ -29,10 +29,6 @@ Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnos
 
 #### Problem 3:
 Pri tem problemu naju je zanimalo kako se spreminja uspešnost opravljenega pregleda skozi leto glede na tip goriva. Podatke sva najprej razdelila po mesecih, nato pa za vsak mesec podatke razdelila na 2 skupini. V eni skupini so bila tista vozila ki uporabljajo bencin, v drugi pa tista ki uporabljajo dizel. Za vsako od teh skupin sva za pripadajoč mesec nato izračunala verjetnost uspešnega opravljanja tehničnega pregleda. Podatke sva nato prikazal z ustrezno vizalizacijo.
-   (_)
-/(.)(.)\
-  ) . (
-  || ||
 
 ![Graf3](slike/graf3)
 
