@@ -36,6 +36,7 @@ for vozilo in dat:
                                                                dictVoz[re.sub("[ .-]", "", vozilo[0])][1] + 1]
     except:
         pass
+
 dictVoz = {key : value[0] / value[1] for key, value in dictVoz.items() if value[1] >= 1000}
 dictVoz = {key : value for key, value in sorted(dictVoz.items(), key = lambda x: x[1])}
 
@@ -56,6 +57,38 @@ Ugotovila sva da najmanjšo verjetnos ima znamka 'TAM', ki pa kljub temu imajo �
 #### Problem 2:
 Pri tej nalogi sva želela ugotoviti v kateri enoti je opravljanje tehničnega pregleda najuspešnejše. To sva storila tako da sva za vsako posamezno enoto, v kateri je vsaj 100 vozil opravljalo tehnični pregled, preštela število vozil, ki so tam uspešno opravila tehnični pregled in ga delila s številom vseh vozil, ki so tam opravila tehnični pregled. Tako sva za vsako enoto dobila verjetnost uspešno opravljenega tehničnega pregleda v teh enoti. Iz dobljenih rezultatov sva izbrala 3 najbolj uspešne enote in 3 najmanj, ter jih ustrezno vizualizirala.
 
+```python
+stevilPregledovEnot = dict()
+
+for line in dat:
+    if line[24] in stevilPregledovEnot:
+        if line[21] == "brezhiben" or line[21] == "pogojno brezhiben":
+            stevilPregledovEnot[line[24]][0] += 1
+        stevilPregledovEnot[line[24]][1] += 1
+    else:
+        if line[21] == "brezhiben" or line[21] == "pogojno brezhiben":
+            stevilPregledovEnot[line[24]] = [1,1]
+
+minPregledov = 100
+uspesnostEnot = dict()
+
+for key in stevilPregledovEnot:
+    if stevilPregledovEnot[key][1] >= minPregledov:
+        uspesnostEnot[key] = stevilPregledovEnot[key][0]/stevilPregledovEnot[key][1]
+        
+uspesnostEnot = dict(sorted(uspesnostEnot.items(), key=operator.itemgetter(1),reverse=True))
+stEnotZaPrikaz = 3
+
+prikaz = dict()
+i = 0;
+for key in uspesnostEnot:
+    if i < 1: najEnota = key
+    prikaz[key] = uspesnostEnot[key]
+    i+=1
+    if i == stEnotZaPrikaz: break
+centers = range(len(prikaz))
+```
+
 ![Graf2](slike/graf2.png)
 
 Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnost opravljenega tehničnega pregleda. Pravtako so te verjetnosti zelo visoke. Pri najslabših treh pa lahko opazimo večjo razliko med verjetnostmi. Opravljanje tehničnega pregleda v katerikoli enoti razen najslabši, bi imelo zelo visoko verjetnost uspeha.
@@ -63,6 +96,36 @@ Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnos
 
 #### Problem 3:
 Pri tem problemu naju je zanimalo kako se spreminja uspešnost opravljenega pregleda skozi leto glede na tip goriva. Podatke sva najprej razdelila po mesecih, nato pa za vsak mesec podatke razdelila na 2 skupini. V eni skupini so bila tista vozila ki uporabljajo bencin, v drugi pa tista ki uporabljajo dizel. Za vsako od teh skupin sva za pripadajoč mesec nato izračunala verjetnost uspešnega opravljanja tehničnega pregleda. Podatke sva nato prikazal z ustrezno vizalizacijo.
+
+```python
+dictGorivo = {}
+for i in range (1,13):
+    dictGorivo[i] = {"b":[0, 0], "d":[0, 0]}
+
+for vozilo in dat[1:]:
+        try:
+            datum = datetime.strptime(vozilo[19], "%m/%d/%Y").date().month
+            if vozilo[12] == "Bencin":
+                # Ali je vozilo opravil tp
+                if vozilo[21] == "brezhiben" or vozilo[21] == "pogojno brezhiben":
+                    dictGorivo[datum] = {"b": [dictGorivo[datum]["b"][0] + 1, dictGorivo[datum]["b"][1] + 1], 
+                                         "d": [dictGorivo[datum]["d"][0], dictGorivo[datum]["d"][1]]}
+                else:
+                    dictGorivo[datum] = {"b": [dictGorivo[datum]["b"][0], dictGorivo[datum]["b"][1] + 1], 
+                                         "d": [dictGorivo[datum]["d"][0], dictGorivo[datum]["d"][1]]}
+            elif vozilo[12] == "Dizel":
+                # Ali je vozilo opravil tp
+                if vozilo[21] == "brezhiben" or vozilo[21] == "pogojno brezhiben":
+                    dictGorivo[datum] = {"b": [dictGorivo[datum]["b"][0], dictGorivo[datum]["b"][1]],
+                                         "d": [dictGorivo[datum]["d"][0] + 1, dictGorivo[datum]["d"][1] + 1]}
+                else:
+                    dictGorivo[datum] = {"b": [dictGorivo[datum]["b"][0], dictGorivo[datum]["b"][1]],
+                                         "d": [dictGorivo[datum]["d"][0], dictGorivo[datum]["d"][1] + 1]}
+        except:
+            pass
+
+dictGorivo = {key : [v["b"][0] / v["b"][1], v["d"][0] / v["d"][1]] for key, v in dictGorivo.items()}
+```
 
 ![Graf3](slike/graf3.png)
 
