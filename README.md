@@ -18,6 +18,6 @@ Pri tej nalogi sva želela ugotoviti v kateri enoti je opravljanje tehničnega p
 
 ![GitHub Logo](/slike/graf2.png)
 
-Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnost opravljenega tehničnega pregleda. Pravtako so te verjetnosti zelo visoke. 
+Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnost opravljenega tehničnega pregleda. Pravtako so te verjetnosti zelo visoke. Pri najslabših treh pa lahko opazimo večjo razliko med verjetnostmi. 
 
 ## Ugotovitve
