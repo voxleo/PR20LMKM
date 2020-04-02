@@ -35,3 +35,4 @@ Pri tem problemu naju je zanimalo kako se spreminja uspešnost opravljenega preg
 Iz grafa lahko razberemo da imajo vozila z dizelskim motorjem večjo verjetnost da opravijo tehnični pregled. Ugotovila sva tudi da je najboljši čas za opravljanje pregleda z vozilom na dizelski pogon spomladi, za vozila z bencinskim pogono pa v začetku poletja. Najslabši čas za oba pa je pozimi.
 
 ## Ugotovitve
+Ugotovila sva da je večino vozil uspešno opravilo tehnične preglede, kar je razvidno tudi iz rezultatov nalog. Zanimivo pa bi bilo narediti primerjavo vozil glede na število prevoženih kilometrov in vrsto vozila. Prav tako pa bi bilo zanimivo izračunati delež uspešno in neuspešno opravljenih pregledov glede na namen vozila.
