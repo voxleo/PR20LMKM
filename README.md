@@ -26,4 +26,15 @@ Pri tej nalogi sva želela ugotoviti v kateri enoti je opravljanje tehničnega p
 
 Kot lahko razvidimo iz grafa imajo najboljše 3 enote praktično enako verjetnost opravljenega tehničnega pregleda. Pravtako so te verjetnosti zelo visoke. Pri najslabših treh pa lahko opazimo večjo razliko med verjetnostmi. Opravljanje tehničnega pregleda v katerikoli enoti razen najslabši, bi imelo zelo visoko verjetnost uspeha.
 
+
+#### Problem 3:
+Pri tem problemu naju je zanimalo kako se spreminja uspešnost opravljenega pregleda skozi leto glede na tip goriva. Podatke sva najprej razdelila po mesecih, nato pa za vsak mesec podatke razdelila na 2 skupini. V eni skupini so bila tista vozila ki uporabljajo bencin, v drugi pa tista ki uporabljajo dizel. Za vsako od teh skupin sva za pripadajoč mesec nato izračunala verjetnost uspešnega opravljanja tehničnega pregleda. Podatke sva nato prikazal z ustrezno vizalizacijo.
+   (_)
+/(.)(.)\
+  ) . (
+  || ||
+
+![Graf3](slike/graf3)
+
+Iz grafa lahko razberemo da imajo vozila z dizelskim motorjem večjo verjetnost da opravijo tehnični pregled. Ugotovila sva tudi da je najboljši čas za opravljanje pregleda z vozilom na dizelski pogon spomladi, za vozila z bencinskim pogono pa v začetku poletja. Najslabši čas za oba pa je pozimi.
 ## Ugotovitve
