@@ -17,7 +17,7 @@ Pri tej nalogi sva želela ugotovite katera znamka vozil je najmanj zanesljiva p
 
 ![Graf1](slike/graf1.png)
 
-
+Ugotovila sva da najmanjšo verjetnos ima znamka 'TAM', ki pa kljub temu imajo še zmeraj kar visoko uspešnost.
 
 #### Problem 2:
 Pri tej nalogi sva želela ugotoviti v kateri enoti je opravljanje tehničnega pregleda najuspešnejše. To sva storila tako da sva za vsako posamezno enoto, v kateri je vsaj 100 vozil opravljalo tehnični pregled, preštela število vozil, ki so tam uspešno opravila tehnični pregled in ga delila s številom vseh vozil, ki so tam opravila tehnični pregled. Tako sva za vsako enoto dobila verjetnost uspešno opravljenega tehničnega pregleda v teh enoti. Iz dobljenih rezultatov sva izbrala 3 najbolj uspešne enote in 3 najmanj, ter jih ustrezno vizualizirala.
@@ -33,4 +33,5 @@ Pri tem problemu naju je zanimalo kako se spreminja uspešnost opravljenega preg
 ![Graf3](slike/graf3.png)
 
 Iz grafa lahko razberemo da imajo vozila z dizelskim motorjem večjo verjetnost da opravijo tehnični pregled. Ugotovila sva tudi da je najboljši čas za opravljanje pregleda z vozilom na dizelski pogon spomladi, za vozila z bencinskim pogono pa v začetku poletja. Najslabši čas za oba pa je pozimi.
+
 ## Ugotovitve
