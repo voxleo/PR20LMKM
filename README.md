@@ -16,65 +16,37 @@ Podatke sva pridobila iz strani "OPSI: odprti podatki" -> [rezultati tehničnega
 Pri tej nalogi sva želela ugotovite katera znamka vozil je najmanj zanesljiva pri opravljanju tehničnega pregleda, pri vozilih ki so bila prvič registrirana vsaj 25 let nazaj. To sva storila tako da sva najprej poiskala znamke vozil ki so imele vsaj 1000 zapisov v tabeli. Nato sva za vsako posamezno znamko izračunala verjetnost uspeha pri opravljanju tehničnega pregleda. Na koncu 10 znamk z najmanjšo verjetnostjo uspeha ter jih prikazala z ustrezno vizualizacijo.
 
 ```python
-# data[][24] <- Izvajalna enota
-# data[][21] <- status opravljenega pregleda (brezhiben=opravil)
+datum = datetime.strptime("01.01.1995", "%d.%m.%Y").date()
 
-# {enota : (st_uspesno_opravljenih_pregledov, št_vseh_vozil_ki_so_v_tej_enoti_opravljala_pregled)}
-stevilPregledovEnot = dict()
+dictVoz = {}
+for vozilo in dat:
+    try:
+        if datetime.strptime(vozilo[14], "%d.%m.%Y").date() < datum:
+            if vozilo[21] != "":
+                # Ali je vozilo že zapisano
+                if re.sub("[ .-]", "", vozilo[0]) not in dictVoz:
+                    dictVoz[re.sub("[ .-]", "", vozilo[0])] = [0, 0]
 
-for line in dat:
-    if line[24] in stevilPregledovEnot:
-        if line[21] == "brezhiben" or line[21] == "pogojno brezhiben":
-            stevilPregledovEnot[line[24]][0] += 1
-        stevilPregledovEnot[line[24]][1] += 1
-    else:
-        if line[21] == "brezhiben" or line[21] == "pogojno brezhiben":
-            stevilPregledovEnot[line[24]] = [1,1]
+                # Ali je vozilo opravil tp
+                if vozilo[21] == "brezhiben" or vozilo[21] == "pogojno brezhiben":
+                    dictVoz[re.sub("[ .-]", "", vozilo[0])] = [dictVoz[re.sub("[ .-]", "", vozilo[0])][0] + 1, 
+                                                               dictVoz[re.sub("[ .-]", "", vozilo[0])][1] + 1]
+                else:
+                    dictVoz[re.sub("[ .-]", "", vozilo[0])] = [dictVoz[re.sub("[ .-]", "", vozilo[0])][0], 
+                                                               dictVoz[re.sub("[ .-]", "", vozilo[0])][1] + 1]
+    except:
+        pass
+dictVoz = {key : value[0] / value[1] for key, value in dictVoz.items() if value[1] >= 1000}
+dictVoz = {key : value for key, value in sorted(dictVoz.items(), key = lambda x: x[1])}
 
-# minimalno št vseh pregledov enote potrebnih da enoto upoštevamo 
-minPregledov = 100
-
-# {enota : verjetnost_uspešno_opravljenega_pregleda}
-uspesnostEnot = dict()
-
-for key in stevilPregledovEnot:
-    if stevilPregledovEnot[key][1] >= minPregledov:
-        uspesnostEnot[key] = stevilPregledovEnot[key][0]/stevilPregledovEnot[key][1]
-        
-uspesnostEnot = dict(sorted(uspesnostEnot.items(), key=operator.itemgetter(1),reverse=True))
-
-stEnotZaPrikaz = 3
-
-
-prikaz = dict()
-i = 0;
-for key in uspesnostEnot:
-    if i < 1: najEnota = key
-    prikaz[key] = uspesnostEnot[key]
-    i+=1
-    if i == stEnotZaPrikaz: break
-centers = range(len(prikaz))
-
-fig, ax = plt.subplots(1, 2, figsize=(14, 6))
-ax[0].bar(centers, prikaz.values(), align='center', tick_label=prikaz.keys())
-ax[0].set_xticklabels(prikaz.keys(), rotation=90)
-ax[0].set_ylabel("Verjetnos uspešno opravljenega pregleda")
-ax[0].set_title("Najuspešnejših %d enot" % (stEnotZaPrikaz))
-
-prikaz = dict()
-uspesnostEnot = dict(sorted(uspesnostEnot.items(), key=operator.itemgetter(1),reverse=False))
-i = 0;
-for key in uspesnostEnot:
-    prikaz[key] = uspesnostEnot[key]
-    i+=1
-    if i == stEnotZaPrikaz: break
-
-centers = range(len(prikaz))
-ax[1].bar(centers, prikaz.values(), align='center', tick_label=prikaz.keys())
-ax[1].set_xticklabels(prikaz.keys(), rotation=90)
-ax[1].set_ylabel("Verjetnos uspešno opravljenega pregleda")
-ax[1].set_title("Najmanj uspešnih %d enot" % (stEnotZaPrikaz))
-plt.show()
+znamke = []
+pr = []
+i = 1
+for k, v in dictVoz.items():
+    znamke.append(k)
+    pr.append(v)
+    i += 1
+    if i > 10: break
 ```
 
 ![Graf1](slike/graf1.png)
